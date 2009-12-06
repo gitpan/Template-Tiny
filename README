@@ -1,0 +1,68 @@
+NAME
+    Template::Tiny - Template Toolkit reimplemted with as little code as
+    possible
+
+SYNOPSIS
+      Template::Tiny->process( <<'END_TEMPLATE', { foo => 'World' } );
+      Hello [% foo %]!
+      END_TEMPLATE
+
+DESCRIPTION
+    WARNING: THIS MODULE IS EXPERIMENTAL AND SUBJECT TO CHANGE WITHOUT
+    NOTICE
+
+    YOU HAVE BEEN WARNED!
+
+    Template::Tiny is a reimplementation of a partial subset of the Template
+    Toolkit, in as few lines of code as possible.
+
+    It is intended for use in light-usage, low-memory, or low-cpu templating
+    situations, where you may need to upgrade to the full feature set in the
+    future, or if you want the familiarity of TT-style templates.
+
+    It is intended to have fully-compatible template and stash usage, with a
+    limited by similar Perl API.
+
+    Unlike Template Toolkit, Template::Tiny will process templates without a
+    compile phase (but despite this is still quicker, owing to heavy use of
+    the Perl regular expression engine.
+
+  SUPPORTED USAGE
+    Only the default "[% %]" tag style is supported.
+
+    Only simple interpolations such as [% variable %] are supported.
+
+    Anything beyond this is currently out of scope
+
+METHODS
+  process
+      Template::Tiny->process( \$input, $vars );
+
+    The "process" method is called to process a template. The firsts
+    parameter is a reference to a text string containing the template text.
+    A reference to a hash may be passed as the second parameter containing
+    definitions of template variables.
+
+SUPPORT
+    Bugs should be reported via the CPAN bug tracker at
+
+    <http://rt.cpan.org/NoAuth/ReportBug.html?Queue=Template-Tiny>
+
+    For other issues, or commercial enhancement or support, contact the
+    author.
+
+AUTHOR
+    Adam Kennedy <adamk@cpan.org>
+
+SEE ALSO
+    Config::Simple
+
+COPYRIGHT
+    Copyright 2009 Adam Kennedy.
+
+    This program is free software; you can redistribute it and/or modify it
+    under the same terms as Perl itself.
+
+    The full text of the license can be found in the LICENSE file included
+    with this module.
+
