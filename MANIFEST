@@ -30,3 +30,9 @@ t/samples/02_null.var
 t/samples/03_chomp.tt
 t/samples/03_chomp.txt
 t/samples/03_chomp.var
+t/samples/04_nested.tt
+t/samples/04_nested.txt
+t/samples/04_nested.var
+t/samples/05_condition.tt
+t/samples/05_condition.txt
+t/samples/05_condition.var

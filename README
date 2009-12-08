@@ -3,7 +3,9 @@ NAME
     possible
 
 SYNOPSIS
-      Template::Tiny->process( <<'END_TEMPLATE', { foo => 'World' } );
+      my $template = Template::Tiny->new;
+      
+  $template->process( <<'END_TEMPLATE', { foo => 'World' } );
       Hello [% foo %]!
       END_TEMPLATE
 
@@ -30,13 +32,30 @@ DESCRIPTION
   SUPPORTED USAGE
     Only the default "[% %]" tag style is supported.
 
-    Only simple interpolations such as [% variable %] are supported.
+    Both the [%+ +%] style explicit whitespace and the [%- -%] style
+    explicit chomp are support, although the [%+ +%] version is unneeded as
+    Template::Tiny does not support default-enabled PRE_CHOMP or POST_CHOMP.
+
+    Variable expressions in the form foo.bar.baz are supported.
+
+    Appropriate simple behaviours for ARRAY reference, HASH reference and
+    objects are supported, but not "VMethods" such as array lengths.
+
+    Simple un-nested conditions are supported, but only in the most simple
+    varieties, like [% IF foo.bar %] content [% END %] and the UNLESS
+    equivalent (to prevent the need to implement expression operators).
 
     Anything beyond this is currently out of scope
 
 METHODS
+  new
+      my $template = Template::Tiny->new;
+
+    The "new" constructor is provided for compatibility with Template
+    Toolkit, but is not strictly necesary.
+
   process
-      Template::Tiny->process( \$input, $vars );
+      $template->process( \$input, $vars );
 
     The "process" method is called to process a template. The firsts
     parameter is a reference to a text string containing the template text.
