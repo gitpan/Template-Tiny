@@ -4,7 +4,10 @@ use strict;
 use vars qw{$VAR1};
 use Test::More;
 use File::Spec::Functions ':ALL';
-use Template ();
+eval "require Template";
+if ( $@ ) {
+	plan( skip_all => 'Template Toolkit is not installed' );
+}
 
 my $SAMPLES = catdir( 't', 'samples' );
 unless ( -d $SAMPLES ) {
@@ -74,6 +77,15 @@ SCOPE: {
 	sub foo {
 		uc $_[0]->{foo};
 	}
+
+	1;
+}
+
+SCOPE: {
+	package False;
+
+	use overload 'bool' => sub { 0 };
+	use overload '""'   => sub { 'Hello' };
 
 	1;
 }

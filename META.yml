@@ -1,28 +1,25 @@
----
-abstract: 'Template Toolkit reimplemted with as little code as possible'
+--- #YAML:1.0
+name:               Template-Tiny
+version:            0.05
+abstract:           Template Toolkit reimplemented in as little code as possible
 author:
-  - 'Adam Kennedy <adamk@cpan.org>'
-build_requires:
-  ExtUtils::MakeMaker: 6.42
-  Test::More: 0.47
+    - Adam Kennedy <adamk@cpan.org>
+license:            perl
+distribution_type:  module
 configure_requires:
-  ExtUtils::MakeMaker: 6.42
-distribution_type: module
-generated_by: 'Module::Install version 0.91'
-license: perl
-meta-spec:
-  url: http://module-build.sourceforge.net/META-spec-v1.4.html
-  version: 1.4
-module_name: Template::Tiny
-name: Template-Tiny
-no_index:
-  directory:
-    - inc
-    - t
+    ExtUtils::MakeMaker:  0
+build_requires:
+    ExtUtils::MakeMaker:  0
 requires:
-  perl: 5.00503
+    perl:        5.00503
+    Test::More:  0.47
 resources:
-  ChangeLog: http://fisheye2.atlassian.com/changelog/cpan/trunk/Template-Tiny
-  license: http://dev.perl.org/licenses/
-  repository: http://svn.ali.as/cpan/trunk/Template-Tiny
-version: 0.03
+    repository:  http://svn.ali.as/cpan/trunk/Template-Tiny
+no_index:
+    directory:
+        - t
+        - inc
+generated_by:       ExtUtils::MakeMaker version 6.50
+meta-spec:
+    url:      http://module-build.sourceforge.net/META-spec-v1.4.html
+    version:  1.4
