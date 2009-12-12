@@ -29,4 +29,7 @@ t/samples/05_condition.var
 t/samples/06_object.tt
 t/samples/06_object.txt
 t/samples/06_object.var
+t/samples/07_nesting.tt
+t/samples/07_nesting.txt
+t/samples/07_nesting.var
 META.yml                                 Module meta-data (added by MakeMaker)
