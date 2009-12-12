@@ -32,4 +32,7 @@ t/samples/06_object.var
 t/samples/07_nesting.tt
 t/samples/07_nesting.txt
 t/samples/07_nesting.var
+t/samples/08_foreach.tt
+t/samples/08_foreach.txt
+t/samples/08_foreach.var
 META.yml                                 Module meta-data (added by MakeMaker)
