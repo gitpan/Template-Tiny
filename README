@@ -41,9 +41,14 @@ DESCRIPTION
     Appropriate simple behaviours for ARRAY reference, HASH reference and
     objects are supported, but not "VMethods" such as array lengths.
 
-    Simple un-nested conditions are supported, but only in the most simple
-    varieties, like [% IF foo.bar %] content [% END %] and the UNLESS
-    equivalent (to prevent the need to implement expression operators).
+    IF, ELSE and UNLESS conditions are supported, but only with simple
+    foo.bar.baz conditions.
+
+    Support for looping is available, in the most simple [% FOREACH item IN
+    list %] form.
+
+    All four IF/ELSE/UNLESS/FOREACH control structures are able to be nested
+    to arbitrary depth.
 
     Anything beyond this is currently out of scope
 
