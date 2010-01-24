@@ -3,7 +3,9 @@ NAME
     possible
 
 SYNOPSIS
-      my $template = Template::Tiny->new;
+      my $template = Template::Tiny->new(
+          TRIM => 1,
+      );
       
   $template->process( <<'END_TEMPLATE', { foo => 'World' } );
       Hello [% foo %]!
@@ -16,7 +18,7 @@ DESCRIPTION
     YOU HAVE BEEN WARNED!
 
     Template::Tiny is a reimplementation of a partial subset of the Template
-    Toolkit, in as few lines of code as possible.
+    Toolkit in as few lines of code as possible.
 
     It is intended for use in light-usage, low-memory, or low-cpu templating
     situations, where you may need to upgrade to the full feature set in the
@@ -58,10 +60,18 @@ DESCRIPTION
 
 METHODS
   new
-      my $template = Template::Tiny->new;
+      my $template = Template::Tiny->new(
+          TRIM => 1,
+      );
 
     The "new" constructor is provided for compatibility with Template
-    Toolkit, but is not strictly necesary.
+    Toolkit.
+
+    The only parameter it currently supports is "TRIM" (which removes
+    leading and trailing whitespace from processed templates).
+
+    Additional parameters can be provided without error, but will be
+    ignored.
 
   process
       $template->process( \$input, $vars );
@@ -86,7 +96,7 @@ SEE ALSO
     Config::Simple
 
 COPYRIGHT
-    Copyright 2009 Adam Kennedy.
+    Copyright 2009 - 2010 Adam Kennedy.
 
     This program is free software; you can redistribute it and/or modify it
     under the same terms as Perl itself.

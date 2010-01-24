@@ -35,4 +35,7 @@ t/samples/07_nesting.var
 t/samples/08_foreach.tt
 t/samples/08_foreach.txt
 t/samples/08_foreach.var
+t/samples/09_trim.tt
+t/samples/09_trim.txt
+t/samples/09_trim.var
 META.yml                                 Module meta-data (added by MakeMaker)

@@ -2,7 +2,7 @@ use strict;
 use vars qw{$VERSION};
 BEGIN {
 	require 5.003_96;
-	$VERSION = '0.09';
+	$VERSION = '0.10';
 }
 use ExtUtils::MakeMaker;
 
@@ -32,9 +32,7 @@ sub WriteMakefile1 {
 	my $eumm_version = $ExtUtils::MakeMaker::VERSION;
 	$eumm_version = eval $eumm_version;
 	die "License not specified" if not exists $params{LICENSE};
-	if ($params{BUILD_REQUIRES}) { #and $eumm_version < 6.5503
-		#Should be modified in future when EUMM will
-		#correctly support BUILD_REQUIRES.
+	if ($params{BUILD_REQUIRES} and $eumm_version < 6.5503) {
 		#EUMM 6.5502 has problems with BUILD_REQUIRES
 		$params{PREREQ_PM}={ %{$params{PREREQ_PM} || {}} , %{$params{BUILD_REQUIRES}} };
 		delete $params{BUILD_REQUIRES};
