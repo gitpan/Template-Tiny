@@ -7,7 +7,8 @@ SYNOPSIS
           TRIM => 1,
       );
       
-  $template->process( <<'END_TEMPLATE', { foo => 'World' } );
+  # Print the template results to STDOUT
+      $template->process( <<'END_TEMPLATE', { foo => 'World' } );
       Hello [% foo %]!
       END_TEMPLATE
 
@@ -74,12 +75,33 @@ METHODS
     ignored.
 
   process
+      # DEPRECATED: Return template results
+      my $text = $template->process( \$input, $vars );
+      
+  # Print template results to STDOUT
       $template->process( \$input, $vars );
+      
+  # Generate template results into a variable
+      my $output = '';
+      $template->process( \$input, $vars, \$output );
 
-    The "process" method is called to process a template. The firsts
-    parameter is a reference to a text string containing the template text.
-    A reference to a hash may be passed as the second parameter containing
-    definitions of template variables.
+    The "process" method is called to process a template.
+
+    The first parameter is a reference to a text string containing the
+    template text. A reference to a hash may be passed as the second
+    parameter containing definitions of template variables.
+
+    If a third parameter is provided, it must be a scalar reference to be
+    populated with the output of the template.
+
+    For a limited amount of time, the old deprecated interface will continue
+    to be supported. If "process" is called without a third parameter, and
+    in scalar or list contest, the template results will be returned to the
+    caller.
+
+    If "process" is called without a third parameter, and in void context,
+    the template results will be print()ed to the currently selected file
+    handle (probably "STDOUT") for compatibility with Template.
 
 SUPPORT
     Bugs should be reported via the CPAN bug tracker at

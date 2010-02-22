@@ -5,7 +5,7 @@ package Template::Tiny;
 use 5.00503;
 use strict;
 
-$Template::Tiny::VERSION = '0.10';
+$Template::Tiny::VERSION = '0.11';
 
 # Evaluatable expression
 my $EXPR = qr/ [a-z_][\w.]* /xs;
@@ -81,17 +81,36 @@ sub process {
 	local $^W = 0;
 
 	# Preprocess to establish unique matching tag sets
+	$self->_preparse( \$copy );
+
+	# Process down the nested tree of conditions
+	my $result = $self->_process( $stash, $copy );
+	if ( @_ ) {
+		${$_[0]} = $result;
+	} elsif ( defined wantarray ) {
+		require Carp;
+		Carp::carp('Returning of template results is deprecated in Template::Tiny 0.11');
+		return $result;
+	} else {
+		print $result;
+	}
+}
+
+# The only reason this is a standalone is so we can
+# do more in-depth testing.
+sub _preparse {
+	my $self = shift;
+	my $copy = shift;
+
+	# Preprocess to establish unique matching tag sets
 	my $id = 0;
-	1 while $copy =~ s/
+	1 while $$copy =~ s/
 		$PREPARSE
 	/
 		my $tag = substr($1, 0, 1) . ++$id;
 		"\[\% $tag $2 \%\]$3\[\% $tag \%\]"
 		. (defined($4) ? "$4\[\% $tag \%\]" : '');
 	/sex;
-
-	# Process down the nested tree of conditions
-	$self->_process( $stash, $copy );
 }
 
 sub _process {
@@ -184,6 +203,7 @@ Template::Tiny - Template Toolkit reimplemented in as little code as possible
       TRIM => 1,
   );
   
+  # Print the template results to STDOUT
   $template->process( <<'END_TEMPLATE', { foo => 'World' } );
   Hello [% foo %]!
   END_TEMPLATE
@@ -253,12 +273,32 @@ Additional parameters can be provided without error, but will be ignored.
 
 =head2 process
 
+  # DEPRECATED: Return template results
+  my $text = $template->process( \$input, $vars );
+  
+  # Print template results to STDOUT
   $template->process( \$input, $vars );
+  
+  # Generate template results into a variable
+  my $output = '';
+  $template->process( \$input, $vars, \$output );
 
-The C<process> method is called to process a template. The firsts parameter
-is a reference to a text string containing the template text. A reference
-to a hash may be passed as the second parameter containing definitions of
-template variables.
+The C<process> method is called to process a template.
+
+The first parameter is a reference to a text string containing the
+template text. A reference to a hash may be passed as the second
+parameter containing definitions of template variables.
+
+If a third parameter is provided, it must be a scalar reference to be
+populated with the output of the template.
+
+For a limited amount of time, the old deprecated interface will continue
+to be supported. If C<process> is called without a third parameter, and in
+scalar or list contest, the template results will be returned to the caller.
+
+If C<process> is called without a third parameter, and in void context, the
+template results will be print()ed to the currently selected file handle
+(probably C<STDOUT>) for compatibility with L<Template>.
 
 =head1 SUPPORT
 

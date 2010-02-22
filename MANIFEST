@@ -8,9 +8,7 @@ t/01_compile.t
 t/02_trivial.t
 t/03_samples.t
 t/04_compat.t
-t/97_meta.t
-t/98_pod.t
-t/99_pmv.t
+t/05_preparse.t
 t/samples/01_hello.tt
 t/samples/01_hello.txt
 t/samples/01_hello.var
@@ -38,4 +36,7 @@ t/samples/08_foreach.var
 t/samples/09_trim.tt
 t/samples/09_trim.txt
 t/samples/09_trim.var
+xt/meta.t
+xt/pmv.t
+xt/pod.t
 META.yml                                 Module meta-data (added by MakeMaker)
